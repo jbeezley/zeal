@@ -45,13 +45,14 @@ FORMS    += mainwindow.ui \
     zealsettingsdialog.ui
 
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -I/opt/X11/include
 
 win32:DEFINES += WIN32 QUAZIP_BUILD
 LIBS += -lz
 
+macx: LIBS += -L/opt/X11/lib -lxcb -lxcb-keysyms
 unix:!macx: LIBS += -lxcb -lxcb-keysyms
-unix:!macx: SOURCES += xcb_keysym.cpp
+SOURCES += xcb_keysym.cpp
 
 icons.path=/usr/share/pixmaps/zeal
 icons.files=icons/*
